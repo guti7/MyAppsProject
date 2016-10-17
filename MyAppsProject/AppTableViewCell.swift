@@ -13,10 +13,8 @@ class AppTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
     
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var genreLabel: UILabel!
-    
-    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
     
 
     override func awakeFromNib() {

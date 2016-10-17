@@ -11,21 +11,86 @@ import UIKit
 class AppsTableViewController: UITableViewController {
     
     
-    var apps: [AppModel]?
+    var apps = [AppModel]()
     
+    var appleAppsURL = "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json"
     
+    func getLatestApps() {
+        let request = URLRequest(url: URL(string: appleAppsURL)!)
+        let urlSession = URLSession.shared
+        
+        let task = urlSession.dataTask(with: request, completionHandler: {
+            (data, response, error) -> Void in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            if let data = data {
+                self.apps = self.parseJsonData(data)
+                
+                OperationQueue.main.addOperation({ () -> Void in
+                    self.tableView.reloadData()
+                })
+            }
+        })
+        
+        task.resume()
+        
+    }
+    
+    func parseJsonData(_ data: Data) -> [AppModel] {
+        
+        var appsArray = [AppModel]()
+        
+        do {
+            
+            let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
+            
+            // Parse the result
+            let jsonFeed = jsonResult?["feed"] as! NSDictionary
+            let jsonEntry = jsonFeed["entry"] as! [AnyObject]
+            
+            
+            for jsonApp in jsonEntry {
+                let app = AppModel()
+                
+                // title
+                let title = jsonApp["im:name"] as! NSDictionary
+                app.title = title["label"] as! String
+                
+                // category
+                let category = jsonApp["category"] as! NSDictionary
+                let categoryAttbs = category["attributes"] as! NSDictionary
+                app.genre = categoryAttbs["label"] as! String
+                
+                // Release date
+                let date = jsonApp["im:releaseDate"] as! NSDictionary
+                let dateAttbs = date["attributes"] as! NSDictionary
+                app.releaseDate = dateAttbs["label"] as! String
+                
+                appsArray.append(app)
+                
+                // image url
+                let images = jsonApp["im:image"] as! NSArray
+                let image100x100 = images[2] as! NSDictionary
+                app.appImageURLString = image100x100["label"] as! String
+                
+            }
+            
+        } catch {
+            print(error)
+        }
+        
+        
+        return appsArray
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        var dataGetter = FetchDataDelegate()
-        
-        
-        apps = dataGetter.getAppData()
-        
+        self.getLatestApps()
         print(apps)
-        
         // TODO: - Reload table data
 
         // Uncomment the following line to preserve selection between presentations
@@ -34,6 +99,8 @@ class AppsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -49,14 +116,18 @@ class AppsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return apps.count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idAppCell", for: indexPath) as! AppTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "appCell", for: indexPath) as! AppTableViewCell
 
-        cell.titleLabel.text = "Title goes here!"
+        cell.titleLabel.text = apps[indexPath.row].title
+        cell.genreLabel.text = apps[indexPath.row].genre
+        cell.releaseDateLabel.text = apps[indexPath.row].releaseDate
+        
+        print("the image url: \(apps[indexPath.row].appImageURLString)")
 
         return cell
     }
