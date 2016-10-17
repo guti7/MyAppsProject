@@ -11,9 +11,13 @@ import Foundation
 
 class AppModel {
     
+    // MARK: - instance variables
     var title: String?
     var genre: String?
     var releaseDate: String?
     var appImageURLString: String?
+    
+    // TODO: - add image variable?
+//    var image: UIImage?
     
 }

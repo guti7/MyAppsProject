@@ -17,7 +17,7 @@ class FetchDataDelegate {
 //    var urlSession: URLSession?
     
     
-    func getAppData() -> [AppModel]? {
+    func getAppData() {
         
         let request = URLRequest(url: URL(string: url)!)
         
@@ -43,7 +43,7 @@ class FetchDataDelegate {
     
     func parseJSONData(data: Data) -> [AppModel] {
         
-        var apps = [AppModel]()
+        var appsArray = [AppModel]()
         
         do {
             
@@ -60,10 +60,12 @@ class FetchDataDelegate {
                 let app = AppModel()
                 
                 let title = jsonApp["title"] as! [String:AnyObject]
-                app.title = title["label"] as! String
+                app.title = title["label"] as? String
 //                app.genre = jsonApp["genre"][ as! String
 //                app.releaseDate = jsonApp["releaseDate"] as! String
 //                app.appImageURLString = jsonApp[']
+                appsArray.append(app)
+                    
             }
             
             
@@ -72,9 +74,6 @@ class FetchDataDelegate {
             print(error)
         }
         
-        return apps
+        return appsArray
     }
-    
-    
-    
 }

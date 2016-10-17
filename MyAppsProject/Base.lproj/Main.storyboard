@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="idAppCell" rowHeight="73" id="ByZ-JX-vy4" customClass="AppTableViewCell" customModule="MyAppsProject" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="appCell" rowHeight="73" id="ByZ-JX-vy4" customClass="AppTableViewCell" customModule="MyAppsProject" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="73"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ByZ-JX-vy4" id="Xix-cN-jpL">
@@ -24,6 +24,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTn-7q-nDT">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="6bK-4s-86b"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -33,7 +36,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Uj-QK-UeM">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Uj-QK-UeM">
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -45,13 +48,13 @@
                                         <constraint firstItem="Kv1-UW-bt9" firstAttribute="top" secondItem="cTn-7q-nDT" secondAttribute="bottom" constant="4" id="9fF-b7-5dX"/>
                                         <constraint firstItem="2Uj-QK-UeM" firstAttribute="top" secondItem="Xix-cN-jpL" secondAttribute="topMargin" constant="18" id="FRn-Gv-Vkz"/>
                                         <constraint firstItem="cTn-7q-nDT" firstAttribute="top" secondItem="Xix-cN-jpL" secondAttribute="topMargin" constant="10" id="X3F-Go-655"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="2Uj-QK-UeM" secondAttribute="trailing" constant="29" id="cvf-hO-YBA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="2Uj-QK-UeM" secondAttribute="trailing" constant="10" id="cvf-hO-YBA"/>
                                         <constraint firstItem="cTn-7q-nDT" firstAttribute="leading" secondItem="Xix-cN-jpL" secondAttribute="leadingMargin" id="tvY-t9-Kib"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="genreLabel" destination="Kv1-UW-bt9" id="mRw-42-M3x"/>
-                                    <outlet property="ratingLabel" destination="2Uj-QK-UeM" id="y6a-aQ-UG7"/>
+                                    <outlet property="releaseDateLabel" destination="2Uj-QK-UeM" id="0LH-PG-pov"/>
                                     <outlet property="titleLabel" destination="cTn-7q-nDT" id="p8g-06-qqY"/>
                                 </connections>
                             </tableViewCell>
