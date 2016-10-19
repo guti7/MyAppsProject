@@ -10,88 +10,36 @@ import UIKit
 
 class AppsTableViewController: UITableViewController {
     
-    
+    // MARK: - Variables
     var apps = [AppModel]()
-    
     var appleAppsURL = "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json"
     
-    func getLatestApps() {
-        let request = URLRequest(url: URL(string: appleAppsURL)!)
-        let urlSession = URLSession.shared
-        
-        let task = urlSession.dataTask(with: request, completionHandler: {
-            (data, response, error) -> Void in
-            if let error = error {
-                print(error)
-                return
-            }
-            
-            if let data = data {
-                self.apps = self.parseJsonData(data)
-                
-                OperationQueue.main.addOperation({ () -> Void in
-                    self.tableView.reloadData()
-                })
-            }
-        })
-        
-        task.resume()
-        
-    }
     
-    func parseJsonData(_ data: Data) -> [AppModel] {
-        
-        var appsArray = [AppModel]()
-        
-        do {
-            
-            let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
-            
-            // Parse the result
-            let jsonFeed = jsonResult?["feed"] as! NSDictionary
-            let jsonEntry = jsonFeed["entry"] as! [AnyObject]
-            
-            
-            for jsonApp in jsonEntry {
-                let app = AppModel()
-                
-                // title
-                let title = jsonApp["im:name"] as! NSDictionary
-                app.title = title["label"] as! String
-                
-                // category
-                let category = jsonApp["category"] as! NSDictionary
-                let categoryAttbs = category["attributes"] as! NSDictionary
-                app.genre = categoryAttbs["label"] as! String
-                
-                // Release date
-                let date = jsonApp["im:releaseDate"] as! NSDictionary
-                let dateAttbs = date["attributes"] as! NSDictionary
-                app.releaseDate = dateAttbs["label"] as! String
-                
-                appsArray.append(app)
-                
-                // image url
-                let images = jsonApp["im:image"] as! NSArray
-                let image100x100 = images[2] as! NSDictionary
-                app.appImageURLString = image100x100["label"] as! String
-                
-            }
-            
-        } catch {
-            print(error)
-        }
-        
-        
-        return appsArray
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.getLatestApps()
-        print(apps)
+        let fetchData = FetchDataDelegate()
+                
+        fetchData.callback = { apps in
+            self.apps = apps
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        
+        }
+        
+        fetchData.getAppData()
+        
+        
+        
+        
+        
+        
+        
         // TODO: - Reload table data
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -101,12 +49,6 @@ class AppsTableViewController: UITableViewController {
     }
     
     
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -126,11 +68,17 @@ class AppsTableViewController: UITableViewController {
         cell.titleLabel.text = apps[indexPath.row].title
         cell.genreLabel.text = apps[indexPath.row].genre
         cell.releaseDateLabel.text = apps[indexPath.row].releaseDate
-        
-        print("the image url: \(apps[indexPath.row].appImageURLString)")
 
         return cell
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -167,14 +115,21 @@ class AppsTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if "detailViewSegue" == segue.identifier {
+            let detailDestination = segue.destination as! DetailViewController
+            if let indexPath = tableView.indexPathForSelectedRow {
+                detailDestination.app = apps[indexPath.row]
+                
+            }
+        }
+
     }
-    */
+    
 
 }

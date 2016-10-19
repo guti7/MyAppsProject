@@ -10,20 +10,19 @@ import Foundation
 
 class FetchDataDelegate {
     
-    var url = "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json"
+    var appsURL = "https://itunes.apple.com/us/rss/topfreeapplications/limit=30/json"
+    var apps: [AppModel]?
     
-    var parsedAppData: [AppModel]?
-    
-//    var urlSession: URLSession?
+    var callback: (([AppModel]) -> ())? // optional
     
     
     func getAppData() {
         
-        let request = URLRequest(url: URL(string: url)!)
+        let request = URLRequest(url: URL(string: appsURL)!)
         
         let urlSession = URLSession.shared
         
-        let task = urlSession.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
+        let task = urlSession.dataTask(with: request, completionHandler: { (data, response, error) in
             if let error = error {
                 print(error)
                 return
@@ -31,15 +30,25 @@ class FetchDataDelegate {
             
             // Parse JSON Data
             if let data = data {
-                self.parsedAppData = self.parseJSONData(data: data)
+                self.apps = self.parseJSONData(data: data)
+                
+                // TODO: - Where to reload data? in view controller?
+                if let callback = self.callback {
+                    if let apps = self.apps{
+                        callback(apps)
+                        
+                    }
+                   
+                }
             }
-            
             
         })
         
-        
         task.resume()
     }
+    
+    
+    
     
     func parseJSONData(data: Data) -> [AppModel] {
         
@@ -49,26 +58,36 @@ class FetchDataDelegate {
             
             let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
             
-            // Parse
+            // Parse the result
             let jsonFeed = jsonResult?["feed"] as! NSDictionary
-            let jsonAuthor = jsonFeed["author"] as! NSDictionary
-            let jsonName = jsonAuthor["name"] as! NSDictionary
+            let jsonEntry = jsonFeed["entry"] as! [AnyObject]
             
-            let jsonApps = jsonName["entry"] as! [AnyObject]
             
-            for jsonApp in jsonApps {
+            for jsonApp in jsonEntry {
                 let app = AppModel()
                 
-                let title = jsonApp["title"] as! [String:AnyObject]
-                app.title = title["label"] as? String
-//                app.genre = jsonApp["genre"][ as! String
-//                app.releaseDate = jsonApp["releaseDate"] as! String
-//                app.appImageURLString = jsonApp[']
+                // title
+                let title = jsonApp["im:name"] as! NSDictionary
+                app.title = title["label"] as! String
+                
+                // category
+                let category = jsonApp["category"] as! NSDictionary
+                let categoryAttbs = category["attributes"] as! NSDictionary
+                app.genre = categoryAttbs["label"] as! String
+                
+                // Release date
+                let date = jsonApp["im:releaseDate"] as! NSDictionary
+                let dateAttbs = date["attributes"] as! NSDictionary
+                app.releaseDate = dateAttbs["label"] as! String
+                
                 appsArray.append(app)
-                    
+                
+                // image url
+                let images = jsonApp["im:image"] as! NSArray
+                let image100x100 = images[2] as! NSDictionary
+                app.appImageURLString = image100x100["label"] as! String
+                
             }
-            
-            
             
         } catch {
             print(error)
