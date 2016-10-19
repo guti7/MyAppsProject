@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="73"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ByZ-JX-vy4" id="Xix-cN-jpL">
-                                    <frame key="frameInset" width="375" height="72"/>
+                                    <frame key="frameInset" width="375" height="73"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTn-7q-nDT">
@@ -83,7 +83,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AppTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMW-XU-ON3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AppTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZMW-XU-ON3">
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -121,7 +121,7 @@
                         <constraints>
                             <constraint firstItem="x3c-jb-gNk" firstAttribute="leading" secondItem="vXv-zX-WAW" secondAttribute="leadingMargin" constant="50" id="2Ke-la-f18"/>
                             <constraint firstAttribute="trailingMargin" secondItem="r3W-CC-iuO" secondAttribute="trailing" constant="77" id="98K-Jh-y6R"/>
-                            <constraint firstItem="ZMW-XU-ON3" firstAttribute="leading" secondItem="vXv-zX-WAW" secondAttribute="leadingMargin" constant="72" id="AZH-ko-Zhb"/>
+                            <constraint firstItem="ZMW-XU-ON3" firstAttribute="leading" secondItem="vXv-zX-WAW" secondAttribute="leadingMargin" constant="20" id="AZH-ko-Zhb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HI8-DP-C22" secondAttribute="trailing" constant="95" id="CzV-rb-AhR"/>
                             <constraint firstItem="ZMW-XU-ON3" firstAttribute="top" secondItem="UXg-dV-z5I" secondAttribute="bottom" constant="48" id="IGa-kL-AQo"/>
                             <constraint firstItem="r3W-CC-iuO" firstAttribute="top" secondItem="OLW-ki-Tny" secondAttribute="bottom" constant="22" id="Lc5-J3-bby"/>
@@ -130,7 +130,7 @@
                             <constraint firstItem="x3c-jb-gNk" firstAttribute="top" secondItem="ZMW-XU-ON3" secondAttribute="bottom" constant="25" id="QNg-px-CBd"/>
                             <constraint firstItem="ssp-tO-Z8K" firstAttribute="centerX" secondItem="HI8-DP-C22" secondAttribute="centerX" id="RIL-YJ-m22"/>
                             <constraint firstItem="OLW-ki-Tny" firstAttribute="leading" secondItem="vXv-zX-WAW" secondAttribute="leadingMargin" constant="87" id="SfI-mW-fSp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZMW-XU-ON3" secondAttribute="trailing" constant="72" id="TZ7-gG-S5e"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZMW-XU-ON3" secondAttribute="trailing" constant="20" id="TZ7-gG-S5e"/>
                             <constraint firstItem="HI8-DP-C22" firstAttribute="leading" secondItem="vXv-zX-WAW" secondAttribute="leadingMargin" constant="95" id="bKN-w5-Dhd"/>
                             <constraint firstItem="OLW-ki-Tny" firstAttribute="top" secondItem="HI8-DP-C22" secondAttribute="bottom" constant="21" id="c48-mU-CRu"/>
                             <constraint firstItem="r3W-CC-iuO" firstAttribute="leading" secondItem="vXv-zX-WAW" secondAttribute="leadingMargin" constant="77" id="g91-aY-VZB"/>
@@ -147,7 +147,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iua-Ef-x2a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1628" y="24.7376311844078"/>
+            <point key="canvasLocation" x="1630" y="25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bij-4q-F2M">

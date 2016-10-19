@@ -22,6 +22,8 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     
+    var imageURL: String?
+    
     // MARK: -IBActions
     
     @IBAction func addToWishListButton(_ sender: AnyObject) {
@@ -39,9 +41,13 @@ class DetailViewController: UIViewController {
         appTitleLabel.text = app!.title
         genreLabel.text = app!.genre
         releaseDateLabel.text = app!.releaseDate
+        imageURL = app!.appImageURLString
         
+        
+        loadImage(urlString: imageURL!)
         // TODO: Download the image, by making a network call. 
         
+       
 
         // Do any additional setup after loading the view.
     }
@@ -52,19 +58,38 @@ class DetailViewController: UIViewController {
     }
     
     
-    func loadPoster(urlString: String) {
-        imageView.af_setImageWithURL(NSURL(string: urlString)!, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
-            switch response.result {
-            case .Success:
-                if let value = response.result.value {
-                    self.backgroundView.image = value
-                    self.randomMovie.movieImage = value
-                }
-            case .Failure(let error):
+    func loadImage(urlString: String) {
+        let imgURL = URL(string: urlString)
+        let request = URLRequest(url: imgURL!)
+        let urlSession = URLSession.shared
+        let task = urlSession.dataTask(with: request, completionHandler: { (data, response, error) in
+            if let error = error {
                 print(error)
+                return
             }
-        }
+            if let data = data {
+                self.imageView.image = UIImage(data: data)
+            }
+            
+        })
+        
+        
+        task.resume()
     }
+    
+//    func loadPoster(urlString: String) {
+//        imageView.af_setImageWithURL(NSURL(string: urlString)!, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+//            switch response.result {
+//            case .Success:
+//                if let value = response.result.value {
+//                    self.backgroundView.image = value
+//                    self.randomMovie.movieImage = value
+//                }
+//            case .Failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
     
 
     /*
