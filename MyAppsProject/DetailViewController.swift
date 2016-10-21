@@ -11,6 +11,8 @@ import UIKit
 class DetailViewController: UIViewController {
     
     var app: AppModel?
+    var imageURL: String?
+    var appManager: FetchDataDelegate? = nil
     
     // MARK: -IBOutlets
     
@@ -22,11 +24,30 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     
-    var imageURL: String?
+    @IBOutlet weak var addToWishListButton: UIButton!
+    
+    
     
     // MARK: -IBActions
     
-    @IBAction func addToWishListButton(_ sender: AnyObject) {
+    @IBAction func addToWishListButton(_ sender: UIButton) {
+        
+        
+        if (sender.titleLabel?.text?.contains("Add"))! {
+            if let manager = appManager {
+                manager.wishList.append(self.app!)
+                sender.setTitle("Remove from wish list", for: .normal)
+                print("added to wishlist")
+            } else {
+                print("Eror")
+            }
+        } else {
+            // Remove from list
+        }
+        
+        
+        
+        
     }
     
     @IBAction func markAsDownloadedButton(_ sender: AnyObject) {

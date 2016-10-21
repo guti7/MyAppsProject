@@ -12,6 +12,7 @@ class FetchDataDelegate {
     
     var appsURL = "https://itunes.apple.com/us/rss/topfreeapplications/limit=30/json"
     var apps: [AppModel]?
+    var wishList = [AppModel]()
     
     var callback: (([AppModel]) -> ())? // optional
     
@@ -68,24 +69,24 @@ class FetchDataDelegate {
                 
                 // title
                 let title = jsonApp["im:name"] as! NSDictionary
-                app.title = title["label"] as! String
+                app.title = (title["label"] as! String)
                 
                 // category
                 let category = jsonApp["category"] as! NSDictionary
                 let categoryAttbs = category["attributes"] as! NSDictionary
-                app.genre = categoryAttbs["label"] as! String
+                app.genre = (categoryAttbs["label"] as! String)
                 
                 // Release date
                 let date = jsonApp["im:releaseDate"] as! NSDictionary
                 let dateAttbs = date["attributes"] as! NSDictionary
-                app.releaseDate = dateAttbs["label"] as! String
+                app.releaseDate = (dateAttbs["label"] as! String)
                 
                 appsArray.append(app)
                 
                 // image url
                 let images = jsonApp["im:image"] as! NSArray
                 let image100x100 = images[2] as! NSDictionary
-                app.appImageURLString = image100x100["label"] as! String
+                app.appImageURLString = (image100x100["label"] as! String)
                 
             }
             

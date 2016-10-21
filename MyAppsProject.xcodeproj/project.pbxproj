@@ -67,11 +67,11 @@
 				CCD0893B1DB151DB004A0F6D /* Assets.xcassets */,
 				CCD0893D1DB151DB004A0F6D /* LaunchScreen.storyboard */,
 				CCD089401DB151DB004A0F6D /* Info.plist */,
+				CCD0894C1DB15FCA004A0F6D /* FetchDataDelegate.swift */,
 				CCD089461DB15266004A0F6D /* AppsTableViewController.swift */,
+				CCFFC8B91DB556E40002D74A /* DetailViewController.swift */,
 				CCD089481DB153C4004A0F6D /* AppTableViewCell.swift */,
 				CCD0894A1DB158D5004A0F6D /* AppModel.swift */,
-				CCD0894C1DB15FCA004A0F6D /* FetchDataDelegate.swift */,
-				CCFFC8B91DB556E40002D74A /* DetailViewController.swift */,
 			);
 			path = MyAppsProject;
 			sourceTree = "<group>";

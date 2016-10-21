@@ -1,37 +1,22 @@
 //
-//  AppsTableViewController.swift
+//  WishListTableViewController.swift
 //  MyAppsProject
 //
-//  Created by Guti on 10/14/16.
+//  Created by Guti on 10/19/16.
 //  Copyright © 2016 PielDeJaguar. All rights reserved.
 //
 
 import UIKit
 
-class AppsTableViewController: UITableViewController {
+class WishListTableViewController: UITableViewController {
     
-    // MARK: - Variables
-    var appsManager = FetchDataDelegate()
-    var apps = [AppModel]()
-    var appleAppsURL = "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json"
-    
+   
+   
+    var wishListApps = [AppModel]()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        appsManager.callback = { apps in
-            self.apps = apps
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        
-        }
-        
-        appsManager.getAppData()
-        
-        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -39,8 +24,12 @@ class AppsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-    
-    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -50,27 +39,21 @@ class AppsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return apps.count
+        return wishListApps.count
     }
 
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "appCell", for: indexPath) as! AppTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "wishListCell", for: indexPath) as!WishListTableViewCell
 
-        cell.titleLabel.text = apps[indexPath.row].title
-        cell.genreLabel.text = apps[indexPath.row].genre
-        cell.releaseDateLabel.text = apps[indexPath.row].releaseDate
+        // Configure the cell...
+        cell.wishListNameLabel.text = wishListApps[indexPath.row].title
+        
+        
 
         return cell
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    
-
 
     /*
     // Override to support conditional editing of the table view.
@@ -107,22 +90,14 @@ class AppsTableViewController: UITableViewController {
     }
     */
 
-    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if "detailViewSegue" == segue.identifier {
-            let detailDestination = segue.destination as! DetailViewController
-            if let indexPath = tableView.indexPathForSelectedRow {
-                detailDestination.app = apps[indexPath.row]
-                detailDestination.appManager = self.appsManager
-                
-            }
-        }
-
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
-    
+    */
 
 }
