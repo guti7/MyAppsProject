@@ -139,6 +139,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addToWishListButton" destination="OLW-ki-Tny" id="xtr-Ev-EoL"/>
                         <outlet property="appTitleLabel" destination="ZMW-XU-ON3" id="CNM-E5-EtJ"/>
                         <outlet property="genreLabel" destination="x3c-jb-gNk" id="Xks-be-ft4"/>
                         <outlet property="imageView" destination="ssp-tO-Z8K" id="G5t-Ot-cH1"/>
