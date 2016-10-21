@@ -15,6 +15,7 @@
 		CCD089491DB153C4004A0F6D /* AppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD089481DB153C4004A0F6D /* AppTableViewCell.swift */; };
 		CCD0894B1DB158D5004A0F6D /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0894A1DB158D5004A0F6D /* AppModel.swift */; };
 		CCD0894D1DB15FCA004A0F6D /* FetchDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD0894C1DB15FCA004A0F6D /* FetchDataDelegate.swift */; };
+		CCFFC8BA1DB556E40002D74A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFFC8B91DB556E40002D74A /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		CCD089481DB153C4004A0F6D /* AppTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTableViewCell.swift; sourceTree = "<group>"; };
 		CCD0894A1DB158D5004A0F6D /* AppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		CCD0894C1DB15FCA004A0F6D /* FetchDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchDataDelegate.swift; sourceTree = "<group>"; };
+		CCFFC8B91DB556E40002D74A /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				CCD089481DB153C4004A0F6D /* AppTableViewCell.swift */,
 				CCD0894A1DB158D5004A0F6D /* AppModel.swift */,
 				CCD0894C1DB15FCA004A0F6D /* FetchDataDelegate.swift */,
+				CCFFC8B91DB556E40002D74A /* DetailViewController.swift */,
 			);
 			path = MyAppsProject;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 				CCD089351DB151DB004A0F6D /* AppDelegate.swift in Sources */,
 				CCD089471DB15266004A0F6D /* AppsTableViewController.swift in Sources */,
 				CCD0894D1DB15FCA004A0F6D /* FetchDataDelegate.swift in Sources */,
+				CCFFC8BA1DB556E40002D74A /* DetailViewController.swift in Sources */,
 				CCD089491DB153C4004A0F6D /* AppTableViewCell.swift in Sources */,
 				CCD0894B1DB158D5004A0F6D /* AppModel.swift in Sources */,
 			);
