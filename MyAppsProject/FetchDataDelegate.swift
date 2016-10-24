@@ -14,7 +14,7 @@ class FetchDataDelegate {
     var apps: [AppModel]?
     var wishList = [AppModel]()
     
-    var callback: (([AppModel]) -> ())? // optional
+    var callback: ((Any, [AppModel]) -> ())? // optional
     
     
     func getAppData() {
@@ -36,7 +36,7 @@ class FetchDataDelegate {
                 // TODO: - Where to reload data? in view controller?
                 if let callback = self.callback {
                     if let apps = self.apps{
-                        callback(apps)
+                        callback(self, apps)
                         
                     }
                    

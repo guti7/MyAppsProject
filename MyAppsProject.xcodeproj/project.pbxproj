@@ -76,8 +76,8 @@
 				CCFFC8B91DB556E40002D74A /* DetailViewController.swift */,
 				CCD089481DB153C4004A0F6D /* AppTableViewCell.swift */,
 				CCD0894A1DB158D5004A0F6D /* AppModel.swift */,
-				CCD9B8E81DBE814C007D2F46 /* WishListTableViewCell.swift */,
 				CCD9B8E91DBE814C007D2F46 /* WishListTableViewController.swift */,
+				CCD9B8E81DBE814C007D2F46 /* WishListTableViewCell.swift */,
 			);
 			path = MyAppsProject;
 			sourceTree = "<group>";

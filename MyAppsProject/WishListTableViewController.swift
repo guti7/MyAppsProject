@@ -11,18 +11,44 @@ import UIKit
 class WishListTableViewController: UITableViewController {
     
    
-   
+    var appsManager = FetchDataDelegate()
     var wishListApps = [AppModel]()
     
-
+//    
+//    var app = AppModel()
+//    var wishApps = [AppModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        app.title = "New title app"
+//        wishApps.append(app)
+        
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        appsManager.callback = { (manager, apps) in
+            self.appsManager = manager as! FetchDataDelegate
+            self.wishListApps = apps
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
+        }
+
+        
+        
+        
+        print("wishListApps: \(wishListApps)")
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,15 +65,15 @@ class WishListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return wishListApps.count
+        return wishListApps.count //wishListApps.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "wishListCell", for: indexPath) as!WishListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "wishCell", for: indexPath) as! WishListTableViewCell
 
         // Configure the cell...
-        cell.wishListNameLabel.text = wishListApps[indexPath.row].title
+        cell.nameLabel.text = wishListApps[indexPath.row].title
         
         
 

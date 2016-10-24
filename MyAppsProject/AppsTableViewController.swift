@@ -20,7 +20,7 @@ class AppsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        appsManager.callback = { apps in
+        appsManager.callback = { (manager, apps) in
             self.apps = apps
             
             DispatchQueue.main.async {
@@ -38,6 +38,10 @@ class AppsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("From apps table view: Apps manager wish: \(appsManager.wishList)")
     }
     
     

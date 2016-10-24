@@ -38,8 +38,9 @@ class DetailViewController: UIViewController {
                 manager.wishList.append(self.app!)
                 sender.setTitle("Remove from wish list", for: .normal)
                 print("added to wishlist")
+                print(manager.wishList)
             } else {
-                print("Eror")
+                print("Error")
             }
         } else {
             // Remove from list
@@ -51,6 +52,7 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func markAsDownloadedButton(_ sender: AnyObject) {
+        
     }
     
     
@@ -66,16 +68,12 @@ class DetailViewController: UIViewController {
         
         
         loadImage(urlString: imageURL!)
-        // TODO: Download the image, by making a network call. 
-        
-       
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
     
     
